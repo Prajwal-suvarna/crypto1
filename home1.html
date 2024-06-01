@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-primary bg-info">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Cryptography</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="home1.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for(ceasar)  }}">Ceasar Cipher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for(shift) }}">Shift Cipher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for(vigenere) }}">Vigenere Cipher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for(vernam) }}">Vernam Cipher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('playfair') }}">Playfair Cipher</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Hill Cipher</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <h1>Caesar Cipher</h1>
+    <p>The Caesar Cipher is a simple substitution cipher, one of the earliest and most well-known encryption techniques. It works by shifting each letter in the plain text a certain number of positions down the alphabet. For example, with a shift of 3, "hello" becomes "khoor".</p>
+
+    <h2>How it works:</h2>
+    <ol>
+        <li>Choose a shift value (usually between 1 and 25).</li>
+        <li>For each letter in the plain text:</li>
+            <ul>
+                <li>If it's uppercase (A-Z), add the shift value to its ASCII code. Wrap around if necessary (e.g., 'X' + 3 becomes 'A').</li>
+                <li>If it's lowercase (a-z), do the same but with lowercase ASCII codes (e.g., 'h' + 3 becomes 'k').</li>
+                <li>Leave non-alphabetic characters (spaces, punctuation) unchanged.</li>
+            </ul>
+        <li>The resulting string of shifted letters is the encrypted message (ciphertext).</li>
+    </ol>
+
+    <h2>Decryption:</h2>
+    <p>Decryption is simply the reverse process. To decrypt the ciphertext, you shift each letter back by the same number of positions used for encryption.</p>
+
+    <h2>Security:</h2>
+    <p>The Caesar Cipher is a very weak encryption method. It's easy to break by trying all possible shift values (brute-force attack) or by analyzing the statistical patterns of the ciphertext (frequency analysis).</p>
+
+    <h2>Learning Resources:</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Caesar_cipher">Wikipedia: Caesar Cipher</a></li>
+        <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography">Khan Academy: Introduction to Cryptography (video)</a></li>
+    </ul>
+    <hr>
+    <h1>Shift Cipher</h1>
+    <p>The Shift Cipher is a generalization of the Caesar Cipher. It allows for a different shift value to be applied to each letter in the plain text. This makes it slightly more secure than the Caesar Cipher, but it's still a relatively simple encryption technique.</p>
+
+    <h2>How it works:</h2>
+    <ol>
+        <li>Choose a set of shift values, one for each letter in the plain text (usually between 1 and 25).</li>
+        <li>For each letter in the plain text:</li>
+            <ul>
+                <li>If it's uppercase (A-Z), add the corresponding shift value to its ASCII code. Wrap around if necessary (similar to Caesar Cipher).</li>
+                <li>If it's lowercase (a-z), do the same but with lowercase ASCII codes.</li>
+                <li>Leave non-alphabetic characters unchanged.</li>
+            </ul>
+        <li>The resulting string of shifted letters is the encrypted message (ciphertext).</li>
+    </ol>
+
+    <h2>Decryption:</h2>
+    <p>Decryption involves applying the same set of shift values in reverse order to each letter in the ciphertext.</p>
+
+    <h2>Security:</h2>
+    <p>The Shift Cipher offers slightly better security than the Caesar Cipher due to the varying shift values. However, it's still vulnerable to brute-force attacks (trying all possible combinations of shift values) and frequency analysis techniques.</p>
+
+    <h2>Comparison to Caesar Cipher:</h2>
+    <ul>
+        <li>Caesar Cipher: Uses a single shift value for all letters.</li>
+        <li>Shift Cipher: Uses a different shift value for each letter.</li>
+        <li>Security: Shift Cipher offers slightly better security due to variable shifts, but is still weak.</li>
+    </ul>
+
+    <h2>Learning Resources:</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Caesar_cipher">Wikipedia: Caesar Cipher (also discusses Shift Cipher)</a></li>
+        <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography">Khan Academy: Introduction to Cryptography (video)</a></li>
+    </ul>
+    <hr>
+    <h1>Vigenère Cipher</h1>
+    <p>The Vigenère Cipher is a polyalphabetic substitution cipher, meaning it uses multiple Caesar Ciphers with varying shifts based on a keyword. This makes it significantly more secure than the Caesar Cipher or Shift Cipher.</p>
+
+    <h2>How it works:</h2>
+    <ol>
+        <li>Choose a keyword (ideally a random word with no repeated letters).</li>
+        <li>Repeat the keyword to match the length of the plain text (if necessary).</li>
+        <li>For each letter in the plain text:</li>
+            <ul>
+                <li>Find the corresponding letter from the keyword.</li>
+                <li>Convert both letters (plain text and keyword) to their numerical positions (A=0, B=1, etc.).</li>
+                <li>Add the keyword letter's position to the plain text letter's position.</li>
+                <li>Apply modulo 26 (wrap around) to keep the result within the alphabet range (0-25).</li>
+                <li>Convert the resulting number back to a letter (numerical position to alphabet letter).</li>
+                <li>Leave non-alphabetic characters unchanged.</li>
+            </ul>
+        <li>The resulting string of shifted letters is the encrypted message (ciphertext).</li>
+    </ol>
+
+    <h2>Decryption:</h2>
+    <p>Decryption involves the same process in reverse. Use the keyword to determine the shift values for each letter in the ciphertext, then subtract the keyword letter's position and apply modulo 26 to return to the original plain text letter.</p>
+
+    <h2>Security:</h2>
+    <p>The Vigenère Cipher offers a significant improvement in security compared to simpler ciphers. However, it can still be broken with advanced techniques like Kasiski examination (finding repeating patterns in the ciphertext) if the keyword is short or predictable.</p>
+
+    <h2>Comparison to Other Ciphers:</h2>
+    <ul>
+        <li>Caesar Cipher: Single shift value for all letters (weak).</li>
+        <li>Shift Cipher: Different shift values for each letter (slightly better than Caesar).</li>
+        <li>Vigenère Cipher: Uses a keyword for varying shifts (more secure, but still vulnerable with short or predictable keywords).</li>
+    </ul>
+
+    <h2>Learning Resources:</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Vigenère_cipher">Wikipedia: Vigenère Cipher</a></li>
+        <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/vigenere-cipher/v/vigenere_cipher_introduction">Khan Academy: Vigenère Cipher Introduction (video)</a></li>
+    </ul>
+    <hr>
+    <h1>Vernam Cipher (One-Time Pad)</h1>
+    <p>The Vernam Cipher, also known as the One-Time Pad (OTP), is a theoretically unbreakable encryption technique. It relies on a one-time use of a random key that is the same length as the plain text message.</p>
+
+    <h2>How it works:</h2>
+    <ol>
+        <li>Generate a random key (often a binary sequence of 0s and 1s) with the same length as the plain text message.</li>
+        <li>For each bit in the plain text message:</li>
+            <ul>
+                <li>Perform a bitwise XOR operation with the corresponding bit from the key (0 XOR 0 = 0, 0 XOR 1 = 1, 1 XOR 0 = 1, 1 XOR 1 = 0).</li>
+            </ul>
+        <li>The resulting string of bits (after XOR with the key) is the encrypted message (ciphertext).</li>
+    </ol>
+
+    <h2>Decryption:</h2>
+    <p>Decryption involves performing the same bitwise XOR operation again with the same one-time pad used for encryption. This essentially cancels out the effect of the key, revealing the original plain text.</p>
+
+    <h2>Security:</h2>
+    <p>The Vernam Cipher is theoretically unbreakable if the following conditions are met:</li>
+    <ul>
+        <li>The key is truly random and never reused.</li>
+        <li>The key length is equal to the message length.</li>
+        <li>The key is kept secret from unauthorized parties.</li>
+    </ul>
+    <p>In practice, these conditions can be challenging to achieve, making the Vernam Cipher impractical for most real-world applications.</p>
+
+    <h2>Comparison to Other Ciphers:</h2>
+    <ul>
+        <li>Caesar Cipher, Shift Cipher, Vigenère Cipher: These rely on mathematical algorithms and are vulnerable to various cryptanalysis techniques.</li>
+        <li>Vernam Cipher (OTP): Theoretically unbreakable if security conditions are met.</li>
+    </ul>
+
+    <h2>Learning Resources:</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Vernam_cipher">Wikipedia: Vernam Cipher</a></li>
+        <li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/vigenere-cipher/v/one_time_pad">Khan Academy: One-Time Pad (video)</a></li>
+    </ul>
+    <hr>
+    <h1>Playfair Cipher</h1>
+    <p>The Playfair Cipher is a classic digraph substitution cipher, meaning it encrypts pairs of letters (digraphs) instead of individual letters. It offers improved security compared to simple substitution ciphers.</p>
+
+    <h2>How it works:</h2>
+    <ol>
+        <li>Create a 5x5 key square using a keyword (remove duplicates and fill with remaining alphabets, excluding J).</li>
+        <li>Break the plain text message into pairs of letters (digraphs).</li>
+        <li>For each digraph:</li>
+            <ul>
+                <li>If both letters are in the same row of the key square, shift them one position to the right (wrapping around if necessary).</li>
+                <li>If both letters are in the same column, shift them one position down (wrapping around if necessary).</li>
+                <li>If the letters are not in the same row or column, find the rectangle formed by their positions in the square. Replace each letter with the letter at the opposite corner of the rectangle.</li>
+            </ul>
+        <li>The resulting string of substituted letters is the encrypted message (ciphertext).</li>
+    </ol>
+
+    <h2>Example:</h2>
+    <p>Plain text: "hello world" (assuming keyword "MONARCHY")</p>
+    <p>Key square (generated using "MONARCHY" and removing duplicates):</p>
+    <pre>
+        B D F H I
+        K L N O P
+        Q R S T U
+        V W X Y Z
+    </pre>
+    <p>Encryption process:</p>
+    <ul>
+        <li>he -> bm (both in same row, shift "h" to right)</li>
+        <li>ll -> xx (both in same column, shift "l" down)</li>
+        <li>ow -> kj (rectangle formed, "o" replaced by "k", "w" replaced by "j")</li>
+        <li>rl -> pt (rectangle formed, "r" replaced by "p", "l" replaced by "t")</li>
+        <li>d  -> d (remains unchanged, single letters are handled differently)</li>
+    </p>
+    <p>Ciphertext: "bmxxtjptd"</p>
+
+    <h2>Decryption:</h2>
+    <p>Decryption involves the same process in reverse. Use the key square to find the original letters based on the shifted positions or opposite corners of rectangles formed by the ciphertext digraphs.</p>
+
+    <h2>Security:</h2>
+    <p>The Playfair Cipher offers better security than simple substitution ciphers due to its digraph substitution and the key square. However, it's still vulnerable to techniques like frequency analysis if the keyword is weak or the message is long.</p>
+
+    <h2>Comparison to Other Ciphers:</h2>
+    <ul>
+        <li>Caesar Cipher, Shift Cipher, Vigenère Cipher: Substitute single letters.</li>
+        <li>Playfair Cipher: Substitutes pairs of letters (digraphs), improving security.</li>
+    </ul>
+
+    <h2>Learning Resources:</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Playfair_cipher">Wikipedia: Playfair Cipher</a></li>
+        <li><a href="https://www.geeksforgeeks.org/playfair-cipher-with-examples/">GeeksforGeeks: Playfair Cipher with Examples</a></li>
+    </ul>
+    <hr>
+    <h1>Hill Cipher</h1>
+    <p>The Hill Cipher, invented by Lester S. Hill in 1929, is a polygraphic substitution cipher. This means it encrypts messages by operating on blocks of letters (often pairs or triplets) at a time, unlike simpler ciphers that focus on individual letters.</p>
+
+    <h2>Key Concepts</h2>
+    <ul>
+        <li><b>Polygraphic Substitution</b>: Operates on groups of letters (e.g., pairs) instead of single letters, improving security compared to Caesar Cipher.</li>
+        <li><b>Matrices</b>: Uses square matrices to represent both message blocks and the encryption key. Matrices are grids of numbers used for mathematical operations.</li>
+        <li><b>Modular Arithmetic</b>: Calculations are performed modulo 26 (wrap around from 25 to 0). Letters are often assigned numerical equivalents (A = 0, B = 1, ..., Z = 25).</li>
+    </ul>
+
+    <h2>Encryption Process</h2>
+    <ol>
+        <li><b>Message Preparation</b>: Convert the plaintext message to numbers (A = 0, B = 1, etc.) and divide into blocks matching the key matrix size (e.g., pairs for 2x2 key). Add padding if needed.</li>
+        <li><b>Key Generation</b>: Choose a random, invertible square matrix of the same size as the message blocks. This matrix is the key for encryption. Invertibility ensures decryption is possible.</li>
+        <li><b>Encryption Steps</b>:
+            <ul>
+                <li>Represent each message block as a column matrix.</li>
+                <li>Multiply each message block matrix by the key matrix using matrix multiplication modulo 26 (results exceeding 25 wrap around).</li>
+                <li>The resulting product matrix contains the encrypted numerical equivalents for that block.</li>
+                <li>Repeat multiplication for all message blocks.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>Decryption Process</h2>
+    <ol>
+        <li><b>Inverse Key Calculation</b>: Find the multiplicative inverse of the key matrix modulo 26. This inverse key is used to reverse the encryption.</li>
+        <li><b>Decryption Steps</b>:
+            <ul>
+                <li>Represent each ciphertext block (encrypted message block) as a column matrix.</li>
+                <li>Multiply each ciphertext block matrix by the inverse key matrix modulo 26.</li>
+                <li>The resulting product matrix contains the decrypted numerical equivalents for the block.</li>
+                <li>Convert the numerical equivalents back to letters to obtain the plaintext message.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>Security Considerations</h2>
+    <p>While the Hill Cipher offers some improvement over simpler ciphers, it has limitations for robust encryption:</p>
+    <ul>
+        <li><b>Linearity</b>: The encryption process is linear, meaning statistical analysis of ciphertexts could potentially reveal information about the key.</li>
+        <li><b>Short Key Length</b>: The key size is limited by the block size, making it vulnerable to brute-force attacks (trying all possible keys) with smaller key spaces compared to modern ciphers.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>The Hill Cipher has historical significance as an early example of polygraphic substitution using matrices. However, due to its linear nature and limited key size, it's not considered a secure encryption method for real-world applications. Modern cryptographic algorithms offer significantly better security through more complex mathematical operations and larger key spaces.</p>
+
+    <h2>Learning Resources</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Hill_cipher">Wikipedia: Hill Cipher</a></li>
+        <li><a href="https://www.geeksforgeeks.org/hill-cipher/">GeeksforGeeks: Hill Cipher</a></li>
+    </ul>
+</body>
+</html>

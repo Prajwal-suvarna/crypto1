@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher</title>
+</head>
+<body>
+    <h1>Hill Cipher</h1>
+    <form action="/" method="post">
+        <label for="choice">Choose:</label>
+        <select id="choice" name="choice">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        <br><br>
+        <label for="matrix_size">Key Matrix Size:</label>
+        <select id="matrix_size" name="matrix_size">
+            <option value="2">2x2</option>
+            <option value="3">3x3</option>
+        </select>
+        <br><br>
+        <label for="key_matrix">Key Matrix:</label><br>
+        <textarea id="key_matrix" name="row_1" rows="3" cols="30" placeholder="Enter row 1"></textarea><br>
+        <textarea name="row_2" rows="3" cols="30" placeholder="Enter row 2"></textarea><br>
+        <textarea name="row_3" rows="3" cols="30" placeholder="Enter row 3"></textarea><br>
+        <br>
+        <label for="plaintext">Plaintext:</label><br>
+        <textarea id="plaintext" name="plaintext" rows="4" cols="50" placeholder="Enter plaintext"></textarea><br>
+        <label for="ciphertext">Ciphertext:</label><br>
+        <textarea id="ciphertext" name="ciphertext" rows="4" cols="50" placeholder="Enter ciphertext"></textarea><br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if plaintext %}
+    <h2>Decrypted Text:</h2>
+    <p>{{ plaintext }}</p>
+    {% endif %}
+    {% if ciphertext %}
+    <h2>Encrypted Text:</h2>
+    <p>{{ ciphertext }}</p>
+    {% endif %}
+</body>
+</html>

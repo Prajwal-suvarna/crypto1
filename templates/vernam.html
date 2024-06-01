@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caesar Cipher</title>
+</head>
+<body>
+    <h1>Caesar Cipher</h1>
+    <form method="POST">
+        1. Encryption 2. Decryption: <br>
+        <input type="number" name="choice" required><br><br>
+        Text: <br>
+        <textarea name="plain" rows="5" cols="30"></textarea><br>
+        Cipher Text (for decryption only): <br>
+        <textarea name="cipher" rows="5" cols="30"></textarea><br><br>
+        Key (use a separate key character for each letter): <br>
+        <input type="text" name="key" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if choice==1 %}
+        <h2>Encrypted Text:</h2>
+        <p>{{ encrypted_text }}</p>
+    {% elif choice==2 %}
+        <h2>Decrypted Text:</h2>
+        <p>{{ decrypted_text }}</p>
+    {% else %}
+        <h2>Choose proper operation</h2>
+    {% endif %}
+</body>
+</html>
